@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Teriyaki Smoked Salmon - Reeves BBQ Co.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <script src="../js/ShoppingListUI.js"></script>
+  <meta name="recipe-id" content="9c508513-7054-4554-b313-835f7cb4c0c8" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .recipe-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .recipe-image {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--sl-border-radius-large);
+      box-shadow: var(--sl-shadow-large);
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .recipe-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .back-button {
+      margin-bottom: 2rem;
+    }
+    .source-info {
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: var(--sl-border-radius-medium);
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+
+  <!-- RECIPE_METADATA_START
+{
+  "id": "9c508513-7054-4554-b313-835f7cb4c0c8",
+  "filename": "teriyakismokedsalmon.html",
+  "createdAt": "2025-08-23T19:01:49.768Z",
+  "modifiedAt": "2025-08-23T19:08:11.233Z",
+  "title": "Teriyaki Smoked Salmon",
+  "description": "This is an UPDATED Teriyaki Smoked Salmon recipe - easy to prepare with just a few ingredients!",
+  "ingredients": [
+    "1 tbsp brown sugar",
+    "2 tbsp soy sauce",
+    "1 tsp white vinegar",
+    "1 tsp fresh grated ginger",
+    "1 tbsp honey",
+    "2 Salmon Portions (about 2 lbs.)"
+  ],
+  "instructions": [
+    "In a large bowl mix together the brown sugar, soy sauce, vinegar, ginger, and honey. Whisk until combined.",
+    "Brush the tops and sides of the salmon with the teriyaki glaze.",
+    "Transfer the salmon to the smoker and place on your grill grate skin side down, and smoke at 200° F for 1 hour.",
+    "After the hour, brush the salmon with the remaining glaze.",
+    "Continue to smoke until your desired internal temperature is reaches. I prefer 135-140°F. (approximately 2 hours total)",
+    "When finished, pull the salmon off and enjoy warm."
+  ],
+  "prepTime": "PT10M",
+  "cookTime": "PT2H",
+  "servings": "4",
+  "author": "Reeves BBQ Co.",
+  "sourceUrl": "https://www.smokedmeatsunday.com/teriyaki-smoked-salmon/",
+  "image": "https://www.smokedmeatsunday.com/wp-content/uploads/2018/05/Teriyaki-Smoked-Salmon-piece-on-plate.jpg"
+}
+RECIPE_METADATA_END -->
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <sl-button variant="text" href="../index.html">
+        <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+        Back to Championship Collection
+      </sl-button>
+    </div>
+    <div class="recipe-header">
+      <h1 style="color: var(--sl-color-neutral-800); margin-bottom: 1rem;">
+        <sl-icon name="fire" style="color: #ff6b35;"></sl-icon>
+        Teriyaki Smoked Salmon
+      </h1>
+      <img src="https://www.smokedmeatsunday.com/wp-content/uploads/2018/05/Teriyaki-Smoked-Salmon-piece-on-plate.jpg" alt="Teriyaki Smoked Salmon" class="recipe-image">
+    </div>
+    <div class="recipe-actions" style="text-align: center; margin-bottom: 2rem;">
+      <sl-button-group>
+        <sl-button variant="neutral" id="edit-recipe-btn">
+          <sl-icon slot="prefix" name="edit"></sl-icon>
+          Edit Recipe
+        </sl-button>
+        <sl-button variant="danger" id="delete-recipe-btn">
+          <sl-icon slot="prefix" name="trash"></sl-icon>
+          Delete Recipe
+        </sl-button>
+      </sl-button-group>
+    </div>
+    <div class="source-info">
+      <sl-alert variant="primary" open>
+        <sl-icon slot="icon" name="link"></sl-icon>
+        <strong>Recipe Source:</strong> Imported from <strong>smokedmeatsunday.com</strong> by Reeves BBQ Co.
+        <sl-button slot="footer" variant="text" href="https://www.smokedmeatsunday.com/teriyaki-smoked-salmon/" target="_blank">
+          <sl-icon slot="prefix" name="arrow-up-right-from-square"></sl-icon>
+          View Original Recipe
+        </sl-button>
+      </sl-alert>
+    </div>
+    <sl-card style="margin-bottom: 2rem;">
+      <sl-icon slot="prefix" name="info-circle"></sl-icon>
+      <h3 slot="header">About This Recipe</h3>
+      <p>This is an UPDATED Teriyaki Smoked Salmon recipe - easy to prepare with just a few ingredients!</p>
+    </sl-card>
+    <div class="recipe-grid">
+      <sl-card>
+      <sl-icon slot="prefix" name="clock"></sl-icon>
+      <h3 slot="header">Recipe Details</h3>
+      <sl-details summary="Cooking Information">
+        <ul style="list-style: none; padding: 0;">
+          <li><sl-badge variant="neutral">Prep:</sl-badge> PT10M</li>
+          <li><sl-badge variant="warning">Cook:</sl-badge> PT2H</li>
+          <li><sl-badge variant="success">Serves:</sl-badge> 4</li>
+        </ul>
+      </sl-details>
+    </sl-card>
+      <sl-card>
+      <sl-icon slot="prefix" name="basket"></sl-icon>
+      <h3 slot="header">Ingredients</h3>
+      <sl-details summary="Shopping List">
+        <ul>
+          <li>1 tbsp brown sugar</li>
+          <li>2 tbsp soy sauce</li>
+          <li>1 tsp white vinegar</li>
+          <li>1 tsp fresh grated ginger</li>
+          <li>1 tbsp honey</li>
+          <li>2 Salmon Portions (about 2 lbs.)</li>
+        </ul>
+      </sl-details>
+    </sl-card>
+      <sl-card>
+      <sl-icon slot="prefix" name="list-check"></sl-icon>
+      <h3 slot="header">Instructions</h3>
+      <sl-details summary="Cooking Steps">
+        <ol>
+          <li>In a large bowl mix together the brown sugar, soy sauce, vinegar, ginger, and honey. Whisk until combined.</li>
+          <li>Brush the tops and sides of the salmon with the teriyaki glaze.</li>
+          <li>Transfer the salmon to the smoker and place on your grill grate skin side down, and smoke at 200° F for 1 hour.</li>
+          <li>After the hour, brush the salmon with the remaining glaze.</li>
+          <li>Continue to smoke until your desired internal temperature is reaches. I prefer 135-140°F. (approximately 2 hours total)</li>
+          <li>When finished, pull the salmon off and enjoy warm.</li>
+        </ol>
+      </sl-details>
+    </sl-card>
+    </div>
+  </div>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const editBtn = document.getElementById('edit-recipe-btn');
+        const deleteBtn = document.getElementById('delete-recipe-btn');
+        const recipeId = '9c508513-7054-4554-b313-835f7cb4c0c8';
+        
+        if (editBtn) {
+          editBtn.addEventListener('click', function() {
+            window.location.href = '/edit-recipe.html?id=' + recipeId;
+          });
+        }
+        
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this recipe? This action cannot be undone.')) {
+              deleteRecipe(recipeId);
+            }
+          });
+        }
+      });
+      
+      async function deleteRecipe(recipeId) {
+        try {
+          // Show loading state
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          const originalContent = deleteBtn.innerHTML;
+          deleteBtn.innerHTML = '<sl-icon name="hourglass"></sl-icon> Deleting...';
+          deleteBtn.disabled = true;
+          
+          const response = await fetch('/api/recipes/' + recipeId, {
+            method: 'DELETE'
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show success message briefly before redirect
+            deleteBtn.innerHTML = '<sl-icon name="check-circle"></sl-icon> Deleted!';
+            setTimeout(() => {
+              window.location.href = '/index.html';
+            }, 1000);
+          } else {
+            alert('Failed to delete recipe: ' + (data.error || 'Unknown error'));
+            deleteBtn.innerHTML = originalContent;
+            deleteBtn.disabled = false;
+          }
+        } catch (error) {
+          alert('Network error: ' + error.message);
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          deleteBtn.innerHTML = originalContent;
+          deleteBtn.disabled = false;
+        }
+      }
+    </script>
+</body>
+</html>

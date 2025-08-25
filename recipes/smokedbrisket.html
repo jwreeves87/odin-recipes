@@ -4,16 +4,23 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Texas-Style Smoked Brisket - My Smoker Recipes</title>
+  <title>Championship Texas Brisket - Reeves BBQ Co.</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <script src="../js/ShoppingListUI.js"></script>
+  <meta name="recipe-id" content="c2a34a5f-068f-4ec4-9a5f-fabdf5542275" />
   <style>
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
       max-width: 1000px;
       margin: 0 auto;
-      font-family: var(--sl-font-sans);
+      padding: 2rem;
     }
     .recipe-header {
       text-align: center;
@@ -41,87 +48,258 @@
     .back-button {
       margin-bottom: 2rem;
     }
+    .source-info {
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: var(--sl-border-radius-medium);
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
   </style>
+
+  <!-- RECIPE_METADATA_START
+{
+  "id": "c2a34a5f-068f-4ec4-9a5f-fabdf5542275",
+  "title": "Championship Texas Brisket",
+  "description": "Authentic Central Texas methodology utilizing precise salt-to-pepper ratios.",
+  "ingredients": [
+    "12-16 lb whole packer brisket",
+    "1/4 cup coarse black pepper",
+    "1/4 cup kosher salt"
+  ],
+  "instructions": [
+    "Trim brisket fat cap to 1/4 inch",
+    "Season with 50/50 salt and pepper",
+    "Smoke fat side down at 225°F",
+    "Wrap in butcher paper at 160°F",
+    "Cook until probe tender at 203°F",
+    "Rest for 2 hours before slicing"
+  ],
+  "prepTime": "PT45M",
+  "cookTime": "PT16H",
+  "servings": "12",
+  "author": "Reeves BBQ Co.",
+  "sourceUrl": "",
+  "image": "https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3",
+  "filename": "smokedbrisket.html",
+  "createdAt": "2025-08-23T19:01:49.769Z",
+  "modifiedAt": "2025-08-23T19:01:49.769Z"
+}
+RECIPE_METADATA_END -->
 </head>
 <body>
-  <div class="back-button">
-    <sl-button variant="text" href="../index.html">
-      <sl-icon slot="prefix" name="arrow-left"></sl-icon>
-      Back to Recipe List
-    </sl-button>
-  </div>
-
-  <div class="recipe-header">
-    <h1 style="color: var(--sl-color-neutral-800); margin-bottom: 1rem;">
-      <sl-icon name="fire" style="color: var(--sl-color-danger-600);"></sl-icon>
-      Texas-Style Smoked Brisket
-    </h1>
-    <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80" alt="Texas-Style Smoked Brisket" class="recipe-image">
-  </div>
-
-  <sl-card style="margin-bottom: 2rem;">
-    <sl-icon slot="prefix" name="info-circle"></sl-icon>
-    <h3 slot="header">About This Recipe</h3>
-    <p>
-      This Texas-style smoked brisket recipe delivers the authentic barbecue experience with a simple salt and pepper rub and low-and-slow smoking. The result is tender, juicy brisket with a beautiful smoke ring and that coveted bark.
+  <div class="container">
+    <div class="back-button">
+      <sl-button variant="text" href="../index.html">
+        <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+        Back to Championship Collection
+      </sl-button>
+    </div>
+    <div class="recipe-header">
+      <h1 style="color: var(--sl-color-neutral-800); margin-bottom: 1rem;">
+        <sl-icon name="fire" style="color: #ff6b35;"></sl-icon>
+        Championship Texas Brisket
+      </h1>
+      <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&amp;ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&amp;auto=format&amp;fit=crop&amp;w=1000&amp;q=80" alt="Championship Texas Brisket" class="recipe-image">
+    </div>
+    <div class="recipe-actions" style="text-align: center; margin-bottom: 2rem;">
+      <sl-button-group>
+        <sl-button variant="neutral" id="edit-recipe-btn">
+          <sl-icon slot="prefix" name="edit"></sl-icon>
+          Edit Recipe
+        </sl-button>
+        <sl-button variant="danger" id="delete-recipe-btn">
+          <sl-icon slot="prefix" name="trash"></sl-icon>
+          Delete Recipe
+        </sl-button>
+      </sl-button-group>
+    </div>
+    
+    <sl-card style="margin-bottom: 2rem;">
+      <sl-icon slot="prefix" name="info-circle"></sl-icon>
+      <h3 slot="header">About This Recipe</h3>
+      <p>
+      This championship-level Texas brisket utilizes authentic Central Texas methodology, emphasizing the precise balance of coarse kosher salt and 16-mesh cracked black pepper. The extended smoking process develops optimal Maillard reaction crusting while maintaining controlled collagen breakdown for competition-grade tenderness.
     </p>
-    <p>
-      Brisket is the holy grail of BBQ - it takes patience, but the results are absolutely worth it. This recipe focuses on letting the meat shine with minimal but effective seasoning.
-    </p>
-    <sl-alert variant="primary" open>
-      <sl-icon slot="icon" name="lightbulb"></sl-icon>
-      For best results, use <strong>Oak or Hickory wood</strong>. The key is maintaining consistent temperature and being patient - don't rush the process!
-    </sl-alert>
-  </sl-card>
-
-  <div class="recipe-grid">
-    <sl-card>
+    </sl-card>
+    <div class="recipe-grid">
+      <sl-card>
       <sl-icon slot="prefix" name="clock"></sl-icon>
-      <h3 slot="header">Logistics</h3>
-      <sl-details summary="Cooking Details">
+      <h3 slot="header">Recipe Details</h3>
+      <sl-details summary="Cooking Information">
         <ul style="list-style: none; padding: 0;">
-          <li><sl-badge variant="neutral" size="medium">Prep Time:</sl-badge> 30 minutes</li>
-          <li><sl-badge variant="neutral" size="medium">Cook Time:</sl-badge> 12-16 hours</li>
-          <li><sl-badge variant="warning" size="medium">Smoker Temp:</sl-badge> 250°F</li>
-          <li><sl-badge variant="success" size="medium">Finish Temp:</sl-badge> 203°F</li>
-          <li><sl-badge variant="primary" size="medium">Style:</sl-badge> Indirect heat</li>
+          <li><sl-badge variant="warning">Cook:</sl-badge> Back to Championship Collection
+      
+    
+
+  
+    
+      
+      Championship Texas Brisket
+    
+    Expert Level
+    Award Winner
+    
+    
+    
+  
+
+  
+    
+    About This Recipe
+    
+      This championship-level Texas brisket utilizes authentic Central Texas methodology, emphasizing the precise balance of coarse kosher salt and 16-mesh cracked black pepper. The extended smoking process develops optimal Maillard reaction crusting while maintaining controlled collagen breakdown for competition-grade tenderness.
+    
+    
+      Brisket mastery requires understanding the complex interplay of temperature, humidity, and time. This method focuses on stall management, bark development, and the critical internal temperature progression that separates amateur from professional results.
+    
+    
+      
+      Professional Tip: Use 80% post oak, 20% hickory for authentic flavor profile. Monitor ambient humidity (ideally 60-65%) and maintain consistent airflow for optimal smoke ring development.
+    
+  
+
+  
+    
+      
+      Logistics
+      
+        
+          Prep Time: 45 minutes
+          Cook Time: 14-18 hours
+          Smoker Temp: 250°F ±5°F
+          Target Temp: 203°F probe tender
+          Humidity: 60-65% RH
+          Wood: Post Oak primary
+        
+      
+    
+
+    
+      
+      Ingredients
+      
+        
+          1 whole packer brisket (14-16 lbs, Choice+ grade)
+          Coarse kosher salt (Diamond Crystal preferred)
+          16-mesh cracked black pepper (Tellicherry grade)
+          Yellow mustard (French&#39;s classic - binding agent)
+          Post oak wood chunks (seasoned 6+ months)
+          Hickory wood chunks (20% blend ratio)
+          Pink butcher paper (unbleached, food-grade)
+          Probe thermometer (dual-probe recommended)
+        
+      
+    
+
+    
+      
+      Instructions
+      
+        
+          Trimming: Square cut the point, remove hard fat, maintain 1/4&quot; fat cap. Score fat cap in 1&quot; crosshatch pattern
+          Seasoning: Apply thin mustard layer, season with 50/50 salt/pepper ratio at 1 Tbsp per pound. Rest 2+ hours
+          Smoker Setup: Preheat to 250°F ±5°F, establish clean-burning fire with 80/20 oak/hickory blend
+          Initial Smoke: Place fat-side down, insert probe into thickest part of flat. Maintain 250°F, no opening for 6 hours
+          Stall Management: At 165°F internal (6-8 hours), wrap in butcher paper. Monitor bark development
+          Final Phase: Continue to 203°F internal, testing probe tenderness (should slide like butter)
+          Rest Period: Hold wrapped at 145-165°F for 2-4 hours minimum (Cambro or cooler)
+          Slicing: Separate point/flat, slice against grain at 1/4&quot; thickness. Serve immediately</li>
         </ul>
       </sl-details>
     </sl-card>
-
-    <sl-card>
+      <sl-card>
       <sl-icon slot="prefix" name="basket"></sl-icon>
       <h3 slot="header">Ingredients</h3>
       <sl-details summary="Shopping List">
-        <ol>
-          <li>1 whole packer brisket (12-15 lbs)</li>
-          <li>Coarse kosher salt</li>
-          <li>Coarse black pepper</li>
-          <li>Garlic powder (optional)</li>
-          <li>Yellow mustard (as binder)</li>
-          <li>Oak or hickory wood chunks</li>
-          <li>Aluminum foil or butcher paper</li>
-        </ol>
+        <ul>
+          <li>1 whole packer brisket (14-16 lbs, Choice+ grade)</li>
+          <li>Coarse kosher salt (Diamond Crystal preferred)</li>
+          <li>16-mesh cracked black pepper (Tellicherry grade)</li>
+          <li>Seasoning: Apply thin mustard layer, season with 50/50 salt/pepper ratio at 1 Tbsp per pound. Rest 2+ hours</li>
+          <li>Final Phase: Continue to 203°F internal, testing probe tenderness (should slide like butter)</li>
+        </ul>
       </sl-details>
     </sl-card>
-
-    <sl-card>
+      <sl-card>
       <sl-icon slot="prefix" name="list-check"></sl-icon>
       <h3 slot="header">Instructions</h3>
       <sl-details summary="Cooking Steps">
         <ol>
-          <li>Trim excess fat, leaving about 1/4 inch fat cap</li>
-          <li>Apply mustard binder and season generously with salt and pepper</li>
-          <li>Let brisket rest at room temperature for 1 hour</li>
-          <li>Preheat smoker to 250°F with wood chunks</li>
-          <li>Smoke fat-side down until internal temp reaches 165°F (6-8 hours)</li>
-          <li>Wrap in butcher paper or foil (Texas Crutch)</li>
-          <li>Continue smoking until internal temp reaches 203°F</li>
-          <li>Rest wrapped for 1-2 hours before slicing</li>
-          <li>Slice against the grain and serve</li>
+          <li>1 whole packer brisket (14-16 lbs, Choice+ grade)</li>
+          <li>Coarse kosher salt (Diamond Crystal preferred)</li>
+          <li>16-mesh cracked black pepper (Tellicherry grade)</li>
+          <li>Yellow mustard (French&#39;s classic - binding agent)</li>
+          <li>Post oak wood chunks (seasoned 6+ months)</li>
+          <li>Hickory wood chunks (20% blend ratio)</li>
+          <li>Pink butcher paper (unbleached, food-grade)</li>
+          <li>Probe thermometer (dual-probe recommended)</li>
+          <li>Trimming: Square cut the point, remove hard fat, maintain 1/4&quot; fat cap. Score fat cap in 1&quot; crosshatch pattern</li>
+          <li>Seasoning: Apply thin mustard layer, season with 50/50 salt/pepper ratio at 1 Tbsp per pound. Rest 2+ hours</li>
+          <li>Smoker Setup: Preheat to 250°F ±5°F, establish clean-burning fire with 80/20 oak/hickory blend</li>
+          <li>Initial Smoke: Place fat-side down, insert probe into thickest part of flat. Maintain 250°F, no opening for 6 hours</li>
+          <li>Stall Management: At 165°F internal (6-8 hours), wrap in butcher paper. Monitor bark development</li>
+          <li>Final Phase: Continue to 203°F internal, testing probe tenderness (should slide like butter)</li>
+          <li>Rest Period: Hold wrapped at 145-165°F for 2-4 hours minimum (Cambro or cooler)</li>
+          <li>Slicing: Separate point/flat, slice against grain at 1/4&quot; thickness. Serve immediately</li>
         </ol>
       </sl-details>
     </sl-card>
+    </div>
   </div>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const editBtn = document.getElementById('edit-recipe-btn');
+        const deleteBtn = document.getElementById('delete-recipe-btn');
+        const recipeId = 'c2a34a5f-068f-4ec4-9a5f-fabdf5542275';
+        
+        if (editBtn) {
+          editBtn.addEventListener('click', function() {
+            window.location.href = '/edit-recipe.html?id=' + recipeId;
+          });
+        }
+        
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this recipe? This action cannot be undone.')) {
+              deleteRecipe(recipeId);
+            }
+          });
+        }
+      });
+      
+      async function deleteRecipe(recipeId) {
+        try {
+          // Show loading state
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          const originalContent = deleteBtn.innerHTML;
+          deleteBtn.innerHTML = '<sl-icon name="hourglass"></sl-icon> Deleting...';
+          deleteBtn.disabled = true;
+          
+          const response = await fetch('/api/recipes/' + recipeId, {
+            method: 'DELETE'
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show success message briefly before redirect
+            deleteBtn.innerHTML = '<sl-icon name="check-circle"></sl-icon> Deleted!';
+            setTimeout(() => {
+              window.location.href = '/index.html';
+            }, 1000);
+          } else {
+            alert('Failed to delete recipe: ' + (data.error || 'Unknown error'));
+            deleteBtn.innerHTML = originalContent;
+            deleteBtn.disabled = false;
+          }
+        } catch (error) {
+          alert('Network error: ' + error.message);
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          deleteBtn.innerHTML = originalContent;
+          deleteBtn.disabled = false;
+        }
+      }
+    </script>
 </body>
 </html>

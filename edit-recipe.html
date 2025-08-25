@@ -1,0 +1,331 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edit Recipe - Reeves BBQ Co.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .form-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .form-grid {
+      display: grid;
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 768px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+    .form-group {
+      display: flex;
+      flex-direction: column;
+    }
+    .form-group label {
+      font-weight: 600;
+      color: #495057;
+      margin-bottom: 0.5rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+    .required {
+      color: #dc3545;
+    }
+    .form-group input,
+    .form-group textarea {
+      padding: 0.75rem;
+      border: 2px solid #e9ecef;
+      border-radius: var(--sl-border-radius-medium);
+      font-size: 1rem;
+      transition: border-color 0.2s ease;
+    }
+    .form-group input:focus,
+    .form-group textarea:focus {
+      outline: none;
+      border-color: #ff6b35;
+      box-shadow: 0 0 0 3px rgba(255, 107, 53, 0.1);
+    }
+    .form-group textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+    .textarea-large {
+      min-height: 150px;
+    }
+    .button-group {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .button-group sl-button {
+      min-width: 120px;
+    }
+    #loading-indicator {
+      display: none;
+      text-align: center;
+      padding: 1rem;
+    }
+    .message {
+      padding: 1rem;
+      border-radius: var(--sl-border-radius-medium);
+      margin-bottom: 1rem;
+      display: none;
+    }
+    #error-messages {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+    }
+    #success-message {
+      background: #d1edff;
+      color: #0c5460;
+      border: 1px solid #b6effb;
+    }
+    .back-button {
+      margin-bottom: 2rem;
+    }
+    .help-text {
+      font-size: 0.875rem;
+      color: #6c757d;
+      margin-top: 0.25rem;
+    }
+    .form-section {
+      background: white;
+      padding: 1.5rem;
+      border-radius: var(--sl-border-radius-large);
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      margin-bottom: 1.5rem;
+    }
+    .section-title {
+      color: #ff6b35;
+      font-size: 1.25rem;
+      font-weight: bold;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <sl-button variant="text" id="back-to-recipe">
+        <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+        Back to Recipe
+      </sl-button>
+    </div>
+
+    <div class="form-header">
+      <h1 style="color: #ff6b35; margin-bottom: 0.5rem;">
+        <sl-icon name="edit" style="margin-right: 0.5rem;"></sl-icon>
+        <span id="form-title">Edit Recipe</span>
+      </h1>
+      <p style="color: #6c757d;">Modify your recipe details and save changes</p>
+    </div>
+
+    <div id="loading-indicator">
+      <sl-spinner style="font-size: 2rem;"></sl-spinner>
+      <p>Loading recipe...</p>
+    </div>
+
+    <div id="error-messages" class="message"></div>
+    <div id="success-message" class="message"></div>
+
+    <form id="recipe-form">
+      <!-- Basic Information -->
+      <div class="form-section">
+        <div class="section-title">
+          <sl-icon name="info-circle"></sl-icon>
+          Basic Information
+        </div>
+        
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="recipe-title">
+              Recipe Title <span class="required">*</span>
+            </label>
+            <input type="text" id="recipe-title" name="title" required maxlength="200">
+            <div class="help-text">Give your recipe a clear, descriptive title</div>
+          </div>
+
+          <div class="form-group">
+            <label for="recipe-description">
+              Description
+            </label>
+            <textarea id="recipe-description" name="description" maxlength="1000"></textarea>
+            <div class="help-text">Brief description of the recipe (optional)</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recipe Content -->
+      <div class="form-section">
+        <div class="section-title">
+          <sl-icon name="list"></sl-icon>
+          Recipe Content
+        </div>
+
+        <div class="form-grid">
+          <div class="form-group">
+            <label for="recipe-ingredients">
+              Ingredients <span class="required">*</span>
+            </label>
+            <textarea id="recipe-ingredients" name="ingredients" required class="textarea-large" placeholder="Enter one ingredient per line:&#10;1 cup flour&#10;2 tsp baking powder&#10;1/2 cup sugar"></textarea>
+            <div class="help-text">Enter each ingredient on a separate line</div>
+          </div>
+
+          <div class="form-group">
+            <label for="recipe-instructions">
+              Instructions <span class="required">*</span>
+            </label>
+            <textarea id="recipe-instructions" name="instructions" required class="textarea-large" placeholder="Enter one step per line:&#10;Preheat oven to 350°F&#10;Mix dry ingredients&#10;Add wet ingredients"></textarea>
+            <div class="help-text">Enter each step on a separate line</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Timing & Serving -->
+      <div class="form-section">
+        <div class="section-title">
+          <sl-icon name="clock"></sl-icon>
+          Timing & Serving
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="recipe-prep-time">
+              Prep Time
+            </label>
+            <input type="text" id="recipe-prep-time" name="prepTime" placeholder="e.g., PT30M or 30 minutes">
+            <div class="help-text">Time to prepare ingredients</div>
+          </div>
+
+          <div class="form-group">
+            <label for="recipe-cook-time">
+              Cook Time
+            </label>
+            <input type="text" id="recipe-cook-time" name="cookTime" placeholder="e.g., PT2H or 2 hours">
+            <div class="help-text">Active cooking time</div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="recipe-servings">
+            Servings
+          </label>
+          <input type="text" id="recipe-servings" name="servings" placeholder="e.g., 4 or 6-8 servings">
+          <div class="help-text">Number of people this recipe serves</div>
+        </div>
+      </div>
+
+      <!-- Additional Information -->
+      <div class="form-section">
+        <div class="section-title">
+          <sl-icon name="link"></sl-icon>
+          Additional Information
+        </div>
+
+        <div class="form-grid">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="recipe-author">
+                Author
+              </label>
+              <input type="text" id="recipe-author" name="author" placeholder="Recipe author name">
+            </div>
+
+            <div class="form-group">
+              <label for="recipe-source-url">
+                Source URL
+              </label>
+              <input type="url" id="recipe-source-url" name="sourceUrl" placeholder="https://example.com/original-recipe">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="recipe-image">
+              Image URL
+            </label>
+            <input type="url" id="recipe-image" name="image" placeholder="https://example.com/recipe-image.jpg">
+            <div class="help-text">URL to a photo of the finished dish</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="button-group">
+        <sl-button type="button" variant="default" id="cancel-button">
+          <sl-icon slot="prefix" name="x-circle"></sl-icon>
+          Cancel
+        </sl-button>
+        
+        <sl-button type="submit" variant="primary" id="save-button">
+          <sl-icon slot="prefix" name="check-circle"></sl-icon>
+          Save Recipe
+        </sl-button>
+        
+        <sl-button type="button" variant="danger" id="delete-button">
+          <sl-icon slot="prefix" name="trash"></sl-icon>
+          Delete Recipe
+        </sl-button>
+      </div>
+    </form>
+  </div>
+
+  <!-- Include RecipeFormValidator -->
+  <script src="js/RecipeFormValidator.js"></script>
+  <!-- Include RecipeEditController -->
+  <script src="js/RecipeEditController.js"></script>
+  
+  <script>
+    // Initialize the controller when page loads
+    document.addEventListener('DOMContentLoaded', () => {
+      window.recipeController = new RecipeEditController();
+      
+      // Update back button based on mode
+      const backButton = document.getElementById('back-to-recipe');
+      const urlParams = new URLSearchParams(window.location.search);
+      const recipeId = urlParams.get('id');
+      
+      if (!recipeId) {
+        // New recipe mode
+        document.getElementById('form-title').textContent = 'Create New Recipe';
+        document.title = 'Create New Recipe - Reeves BBQ Co.';
+        backButton.textContent = 'Back to Home';
+        backButton.addEventListener('click', () => {
+          window.location.href = '/index.html';
+        });
+      } else {
+        // Edit mode - back button will be updated by controller when recipe loads
+        backButton.addEventListener('click', () => {
+          window.recipeController.handleCancel();
+        });
+      }
+    });
+  </script>
+</body>
+</html>

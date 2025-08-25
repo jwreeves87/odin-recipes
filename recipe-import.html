@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Recipe Import - Reeves BBQ Co.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .import-card {
+      background: white;
+      border-radius: var(--sl-border-radius-large);
+      padding: 2rem;
+      box-shadow: var(--sl-shadow-large);
+      margin-bottom: 2rem;
+    }
+    .preview-card {
+      background: #f8f9fa;
+      border: 1px solid #e9ecef;
+      border-radius: var(--sl-border-radius-medium);
+      padding: 1.5rem;
+      margin-top: 2rem;
+      display: none;
+    }
+    .preview-card.show {
+      display: block;
+    }
+    .preview-image {
+      max-width: 200px;
+      height: 150px;
+      object-fit: cover;
+      border-radius: var(--sl-border-radius-medium);
+      float: right;
+      margin-left: 1rem;
+    }
+    .back-button {
+      margin-bottom: 2rem;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <sl-button variant="text" href="index.html">
+        <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+        Back to Championship Collection
+      </sl-button>
+    </div>
+
+    <div style="text-align: center; margin-bottom: 2rem;">
+      <h1 style="color: #ff6b35;">
+        <sl-icon name="plus-circle"></sl-icon>
+        Recipe Import
+      </h1>
+      <p>Import recipes from any website with structured recipe data</p>
+    </div>
+
+    <div class="import-card">
+      <sl-card>
+        <h3 slot="header">
+          <sl-icon name="link"></sl-icon>
+          Import Recipe from URL
+        </h3>
+        
+        <sl-input 
+          label="Recipe URL" 
+          placeholder="https://example.com/amazing-recipe" 
+          id="recipe-url"
+          style="margin-bottom: 1rem;"
+          help-text="Enter the full URL of the recipe you want to import"
+        ></sl-input>
+
+        <sl-button variant="primary" id="import-recipe" style="width: 100%;">
+          <sl-icon slot="prefix" name="download"></sl-icon>
+          Import Recipe
+        </sl-button>
+
+        <div id="error-message" style="display: none; margin-top: 1rem;">
+          <sl-alert variant="danger">
+            <sl-icon slot="icon" name="exclamation-triangle"></sl-icon>
+            <span id="error-text"></span>
+          </sl-alert>
+        </div>
+
+        <div id="loading" style="display: none; text-align: center; margin-top: 1rem;">
+          <sl-spinner style="font-size: 2rem;"></sl-spinner>
+          <p>Importing recipe data...</p>
+        </div>
+      </sl-card>
+    </div>
+
+    <div id="recipe-preview" class="preview-card">
+      <sl-card>
+        <h3 slot="header">
+          <sl-icon name="eye"></sl-icon>
+          Recipe Preview
+        </h3>
+
+        <div id="preview-content">
+          <!-- Preview content will be inserted here -->
+        </div>
+
+        <div style="display: flex; gap: 1rem; margin-top: 2rem; justify-content: flex-end;">
+          <sl-button variant="success" id="save-recipe">
+            <sl-icon slot="prefix" name="check"></sl-icon>
+            Save Recipe
+          </sl-button>
+        </div>
+      </sl-card>
+    </div>
+  </div>
+
+  <!-- Load our classes -->
+  <script src="js/Recipe.js?v=2" onload="console.log('Recipe.js loaded')" onerror="console.error('Recipe.js failed to load')"></script>
+  <script src="js/RecipeTemplate.js?v=2" onload="console.log('RecipeTemplate.js loaded')" onerror="console.error('RecipeTemplate.js failed to load')"></script>
+  <script src="js/RecipeGenerator.js?v=2" onload="console.log('RecipeGenerator.js loaded')" onerror="console.error('RecipeGenerator.js failed to load')"></script>
+
+  <script>
+    // Wait for all scripts to load before initializing
+    function waitForScripts() {
+      return new Promise((resolve) => {
+        console.log('Checking script availability:', {
+          Recipe: typeof Recipe !== 'undefined',
+          RecipeTemplate: typeof RecipeTemplate !== 'undefined', 
+          RecipeGenerator: typeof RecipeGenerator !== 'undefined'
+        });
+        
+        if (typeof Recipe !== 'undefined' && 
+            typeof RecipeTemplate !== 'undefined' && 
+            typeof RecipeGenerator !== 'undefined') {
+          console.log('All scripts ready!');
+          resolve();
+        } else {
+          setTimeout(() => waitForScripts().then(resolve), 100);
+        }
+      });
+    }
+  </script>
+
+  <script>
+    class RecipeImporter {
+      constructor() {
+        this.generator = new RecipeGenerator();
+        this.currentRecipeData = null;
+        this.initializeEventListeners();
+      }
+
+      initializeEventListeners() {
+        console.log('Setting up event listeners');
+        const importButton = document.getElementById('import-recipe');
+        const saveButton = document.getElementById('save-recipe');
+        const urlInput = document.getElementById('recipe-url');
+        
+        console.log('Import button:', importButton);
+        console.log('Save button:', saveButton);
+        console.log('URL input:', urlInput);
+        
+        if (importButton) {
+          importButton.addEventListener('click', () => {
+            console.log('Import button clicked via event listener');
+            this.importRecipe();
+          });
+        }
+        
+        if (saveButton) {
+          saveButton.addEventListener('click', () => this.saveRecipe());
+        }
+        
+        // Allow pressing Enter in URL input
+        if (urlInput) {
+          urlInput.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter') {
+              console.log('Enter key pressed in URL input');
+              this.importRecipe();
+            }
+          });
+        }
+      }
+
+      async importRecipe() {
+        console.log('Import recipe button clicked');
+        const urlInput = document.getElementById('recipe-url');
+        const url = urlInput.value.trim();
+        console.log('URL:', url);
+        
+        if (!url) {
+          this.showError('Please enter a recipe URL');
+          return;
+        }
+
+        this.showLoading();
+        this.hideError();
+        this.hidePreview();
+
+        try {
+          console.log('Sending request to /api/scrape-recipe');
+          const response = await fetch('/api/scrape-recipe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ url })
+          });
+
+          console.log('Response status:', response.status);
+          if (!response.ok) {
+            const errorData = await response.json();
+            console.log('Error data:', errorData);
+            throw new Error(errorData.error || `HTTP ${response.status}`);
+          }
+
+          const data = await response.json();
+          console.log('Recipe data received:', data);
+          this.currentRecipeData = data.recipe;
+          this.showPreview(data.recipe);
+
+        } catch (error) {
+          console.log('Error occurred:', error);
+          this.showError(error.message);
+        } finally {
+          this.hideLoading();
+        }
+      }
+
+      showPreview(recipeData) {
+        const previewContent = document.getElementById('preview-content');
+        const imageHtml = recipeData.image ? `<img src="${recipeData.image}" alt="${recipeData.title}" class="preview-image">` : '';
+        
+        previewContent.innerHTML = `
+          ${imageHtml}
+          <h2>${recipeData.title}</h2>
+          <p><strong>Source:</strong> ${recipeData.sourceUrl}</p>
+          <p style="clear: both;">${recipeData.description}</p>
+          
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1rem 0;">
+            ${recipeData.prepTime ? `<div><strong>Prep:</strong> ${recipeData.prepTime}</div>` : ''}
+            ${recipeData.cookTime ? `<div><strong>Cook:</strong> ${recipeData.cookTime}</div>` : ''}
+            ${recipeData.servings ? `<div><strong>Serves:</strong> ${recipeData.servings}</div>` : ''}
+          </div>
+
+          <sl-details summary="Ingredients (${recipeData.ingredients?.length || 0})">
+            <ul>
+              ${recipeData.ingredients?.map(ing => `<li>${ing}</li>`).join('') || '<li>No ingredients found</li>'}
+            </ul>
+          </sl-details>
+
+          <sl-details summary="Instructions (${recipeData.instructions?.length || 0})">
+            <ol>
+              ${recipeData.instructions?.map(inst => `<li>${inst}</li>`).join('') || '<li>No instructions found</li>'}
+            </ol>
+          </sl-details>
+        `;
+
+        document.getElementById('recipe-preview').classList.add('show');
+      }
+
+      async saveRecipe() {
+        if (!this.currentRecipeData) return;
+
+        try {
+          const { html, filename } = this.generator.generate(this.currentRecipeData);
+          
+          const response = await fetch('/api/save-recipe', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ 
+              html, 
+              filename,
+              recipeData: this.currentRecipeData 
+            })
+          });
+
+          if (!response.ok) {
+            const errorData = await response.json();
+            throw new Error(errorData.error || 'Failed to save recipe');
+          }
+
+          const result = await response.json();
+          
+          // Show success message
+          const alert = Object.assign(document.createElement('sl-alert'), {
+            variant: 'success',
+            innerHTML: `
+              <sl-icon slot="icon" name="check"></sl-icon>
+              <strong>Recipe Saved!</strong> ${result.message}
+            `
+          });
+          
+          alert.duration = 5000;
+          alert.style.marginTop = '1rem';
+          document.querySelector('.import-card').appendChild(alert);
+          alert.show();
+
+          // Reset form
+          document.getElementById('recipe-url').value = '';
+          this.hidePreview();
+
+        } catch (error) {
+          this.showError('Failed to save recipe: ' + error.message);
+        }
+      }
+
+      showLoading() {
+        document.getElementById('loading').style.display = 'block';
+      }
+
+      hideLoading() {
+        document.getElementById('loading').style.display = 'none';
+      }
+
+      showError(message) {
+        document.getElementById('error-text').textContent = message;
+        document.getElementById('error-message').style.display = 'block';
+      }
+
+      hideError() {
+        document.getElementById('error-message').style.display = 'none';
+      }
+
+      hidePreview() {
+        document.getElementById('recipe-preview').classList.remove('show');
+      }
+    }
+
+    // Initialize when page loads
+    document.addEventListener('DOMContentLoaded', async () => {
+      console.log('DOM loaded, waiting for scripts');
+      
+      // Wait for all classes to load
+      await waitForScripts();
+      console.log('All scripts loaded, initializing RecipeImporter');
+      
+      // Wait a bit for Shoelace components to load
+      setTimeout(() => {
+        const recipeImporter = new RecipeImporter();
+        console.log('RecipeImporter initialized:', recipeImporter);
+        
+        // Also add a direct click handler as backup
+        const importBtn = document.getElementById('import-recipe');
+        if (importBtn) {
+          importBtn.onclick = () => {
+            console.log('Direct onclick handler triggered');
+            recipeImporter.importRecipe();
+          };
+        }
+      }, 1000);
+    });
+  </script>
+</body>
+</html>

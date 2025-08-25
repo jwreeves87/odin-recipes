@@ -4,72 +4,520 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>My Smoker Recipes</title>
+  <title>Reeves BBQ Co. - Family Loved Techniques, Personally Tested Results</title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
   <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <script src="js/ShoppingListUI.js"></script>
   <style>
     body {
       margin: 0;
-      padding: 2rem;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
       max-width: 1200px;
       margin: 0 auto;
-      font-family: var(--sl-font-sans);
+      padding: 2rem;
     }
     .hero-section {
       text-align: center;
-      margin-bottom: 3rem;
+      padding: 4rem 2rem;
+      background: linear-gradient(rgba(0,0,0,0.8), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1544025162-d76694265947?ixlib=rb-4.0.3') center/cover;
+      margin: 0 -2rem 3rem -2rem;
+      border-radius: 0 0 var(--sl-border-radius-large) var(--sl-border-radius-large);
+      color: #ffffff;
+    }
+    .hero-logo {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: #ff6b35;
+      text-shadow: 2px 2px 4px rgba(0,0,0,0.8);
+      margin-bottom: 1rem;
+    }
+    .hero-tagline {
+      font-size: 1.4rem;
+      color: #f4f4f4;
+      text-shadow: 1px 1px 2px rgba(0,0,0,0.8);
+      margin-bottom: 2rem;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin: 3rem 0;
+    }
+    .stat-card {
+      text-align: center;
+      padding: 1.5rem;
+      background: #ffffff;
+      border: 2px solid #ff6b35;
+      border-radius: var(--sl-border-radius-medium);
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #ff6b35;
+    }
+    .stat-label {
+      color: #495057;
+      margin-top: 0.5rem;
+      font-weight: 500;
     }
     .recipe-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
       gap: 2rem;
-      margin-top: 2rem;
+      margin-top: 3rem;
+    }
+    .recipe-card {
+      background: #ffffff;
+      border: 2px solid #e9ecef;
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .recipe-card:hover {
+      transform: translateY(-5px);
+      border-color: #ff6b35;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+    }
+    .professional-badge {
+      position: absolute;
+      top: 15px;
+      right: 15px;
+      background: linear-gradient(45deg, #ff6b35, #d63031);
+      color: white;
+      padding: 0.5rem 1rem;
+      border-radius: var(--sl-border-radius-medium);
+      font-size: 0.8rem;
+      font-weight: bold;
+      text-transform: uppercase;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.3);
+    }
+    .awards-section {
+      background: #ffffff;
+      padding: 2rem;
+      border-radius: var(--sl-border-radius-large);
+      border: 2px solid #ff6b35;
+      margin: 3rem 0;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    }
+    .quick-export-btn {
+      --sl-color-success-600: #28a745;
+      --sl-color-success-50: #d4edda;
+      transition: all 0.3s ease;
+    }
+    .quick-export-btn:hover {
+      transform: scale(1.1);
+    }
+    .recipe-selection-card {
+      transition: all 0.3s ease;
+    }
+    .recipe-selection-card:hover {
+      transform: translateY(-2px);
     }
   </style>
 </head>
 <body>
   <div class="hero-section">
-    <sl-icon name="fire" style="font-size: 3rem; color: var(--sl-color-primary-600);"></sl-icon>
-    <h1 style="margin: 1rem 0; color: var(--sl-color-neutral-800);">My Smoker Recipes</h1>
-    <p style="font-size: 1.2rem; color: var(--sl-color-neutral-600); margin-bottom: 0;">Delicious BBQ recipes perfected over time</p>
+    <div class="hero-logo">
+      🔥 REEVES BBQ CO. 🔥
+    </div>
+    <div class="hero-tagline">
+      Family Loved Techniques • Time-Tested Results
+    </div>
   </div>
 
-  <div class="recipe-grid">
-    <sl-card class="recipe-card">
+  <div class="container">
+    <div style="text-align: center; margin: 1rem 0 2rem 0;">
+      <sl-button variant="primary" size="large" href="calculator.html" style="margin-right: 1rem;">
+        <sl-icon slot="prefix" name="calculator"></sl-icon>
+        Professional BBQ Tools & Calculators
+      </sl-button>
+      <sl-button variant="success" size="large" href="recipe-import.html" style="margin-right: 1rem;">
+        <sl-icon slot="prefix" name="plus-circle"></sl-icon>
+        Import Recipe from Any Website
+      </sl-button>
+      <sl-button variant="warning" size="large" id="bulk-shopping-list-btn">
+        <sl-icon slot="prefix" name="basket"></sl-icon>
+        Create Shopping List
+      </sl-button>
+    </div>
+
+    <!-- Shopping List Selection Panel -->
+    <div id="shopping-list-panel" style="display: none; background: #fff; border-radius: var(--sl-border-radius-large); padding: 2rem; margin: 2rem 0; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 2px solid #ff6b35;">
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <h3 style="color: #ff6b35; margin: 0 0 0.5rem 0;">
+          <sl-icon name="basket" style="margin-right: 0.5rem;"></sl-icon>
+          Create Master Shopping List
+        </h3>
+        <p style="margin: 0; color: #6c757d;">Select recipes to combine into a single shopping list</p>
+      </div>
+      
+      <div style="text-align: center; margin-bottom: 1.5rem;">
+        <sl-button-group>
+          <sl-button variant="neutral" id="select-all-recipes">
+            <sl-icon slot="prefix" name="check-all"></sl-icon>
+            Select All
+          </sl-button>
+          <sl-button variant="neutral" id="clear-selection">
+            <sl-icon slot="prefix" name="x"></sl-icon>
+            Clear Selection
+          </sl-button>
+          <sl-button variant="primary" id="generate-bulk-list" disabled>
+            <sl-icon slot="prefix" name="list-check"></sl-icon>
+            Generate Shopping List
+          </sl-button>
+          <sl-button variant="default" id="close-shopping-panel">
+            Cancel
+          </sl-button>
+        </sl-button-group>
+      </div>
+      
+      <div id="recipe-selection-grid" class="recipe-grid">
+        <!-- Recipe cards will be populated by JavaScript -->
+      </div>
+    </div>
+
+    <h2 style="text-align: center; color: #ff6b35; margin: 3rem 0 2rem 0; font-size: 2.5rem;">
+      <sl-icon name="book-open" style="margin-right: 1rem;"></sl-icon>
+      Recipe Collection
+    </h2>
+
+    <div class="recipe-grid">
+    <sl-card class="recipe-card" style="position: relative;">
+      <div class="professional-badge">Pitmaster Level</div>
       <img
         slot="image"
         src="https://images.getrecipekit.com/20220408020950-rib-20photo-201.jpg?aspect_ratio=1:1&quality=90&"
-        alt="Smoked Baby Back Ribs"
+        alt="Championship Baby Back Ribs"
         style="height: 200px; object-fit: cover;"
       />
-      <strong>Smoked Baby Back Ribs</strong>
+      <strong style="color: #ff6b35; font-size: 1.2rem;">Championship Baby Back Ribs</strong>
       <br />
-      <small>Competition-style ribs with the perfect balance of sweet and smoky flavors. Tender meat that pulls easily from the bone.</small>
+      <sl-badge variant="warning" size="small" style="margin: 0.5rem 0;">5-Hour Process</sl-badge>
+      <sl-badge variant="primary" size="small">Competition Method</sl-badge>
+      <br /><br />
+      <small style="color: #495057; font-weight: 500; line-height: 1.5;">Professional competition-style ribs featuring optimal Maillard reaction development. Precise temperature control yields consistent bark formation while maintaining optimal collagen breakdown for that perfect "bite-through" texture.</small>
       <div slot="footer">
-        <sl-button variant="primary" href="recipes/smokedbabybackribs.html">
-          <sl-icon slot="prefix" name="book"></sl-icon>
-          View Recipe
-        </sl-button>
+        <sl-button-group>
+          <sl-button variant="primary" href="recipes/smokedbabybackribs.html">
+            <sl-icon slot="prefix" name="book"></sl-icon>
+            View Recipe
+          </sl-button>
+          <sl-button variant="success" size="small" class="quick-export-btn" data-recipe-id="461b0380-8f26-43f7-a479-9b9859637d45">
+            <sl-icon slot="prefix" name="basket"></sl-icon>
+          </sl-button>
+        </sl-button-group>
       </div>
     </sl-card>
 
-    <sl-card class="recipe-card">
+    <sl-card class="recipe-card" style="position: relative;">
+      <div class="professional-badge">Expert Level</div>
       <img
         slot="image"
         src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80"
-        alt="Texas-Style Smoked Brisket"
+        alt="Championship Texas Brisket"
         style="height: 200px; object-fit: cover;"
       />
-      <strong>Texas-Style Smoked Brisket</strong>
+      <strong style="color: #ff6b35; font-size: 1.2rem;">Championship Texas Brisket</strong>
       <br />
-      <small>Authentic Texas BBQ with a simple salt and pepper rub. Low and slow smoked to perfection with a beautiful bark and smoke ring.</small>
+      <sl-badge variant="danger" size="small" style="margin: 0.5rem 0;">16-Hour Process</sl-badge>
+      <sl-badge variant="success" size="small">Award Winner</sl-badge>
+      <br /><br />
+      <small style="color: #495057; font-weight: 500; line-height: 1.5;">Authentic Central Texas methodology utilizing precise salt-to-pepper ratios. Advanced stall management and collagen rendering techniques produce consistent 203°F probe tenderness with optimal smoke ring penetration.</small>
       <div slot="footer">
-        <sl-button variant="primary" href="recipes/smokedbrisket.html">
-          <sl-icon slot="prefix" name="book"></sl-icon>
-          View Recipe
-        </sl-button>
+        <sl-button-group>
+          <sl-button variant="primary" href="recipes/smokedbrisket.html">
+            <sl-icon slot="prefix" name="book"></sl-icon>
+            View Recipe
+          </sl-button>
+          <sl-button variant="success" size="small" class="quick-export-btn" data-recipe-id="c2a34a5f-068f-4ec4-9a5f-fabdf5542275">
+            <sl-icon slot="prefix" name="basket"></sl-icon>
+          </sl-button>
+        </sl-button-group>
       </div>
     </sl-card>
+
+    <sl-card class="recipe-card" style="position: relative;">
+      <div class="professional-badge">Imported Recipe</div>
+      <img
+        slot="image"
+        src="https://www.smokedmeatsunday.com/wp-content/uploads/2018/05/Teriyaki-Smoked-Salmon-piece-on-plate.jpg"
+        alt="Teriyaki Smoked Salmon"
+        style="height: 200px; object-fit: cover;"
+      />
+      <strong style="color: #ff6b35; font-size: 1.2rem;">Teriyaki Smoked Salmon</strong>
+      <br />
+      <sl-badge variant="success" size="small" style="margin: 0.5rem 0;">2-Hour Process</sl-badge>
+      <sl-badge variant="neutral" size="small">Imported Recipe</sl-badge>
+      <br /><br />
+      <small style="color: #495057; font-weight: 500; line-height: 1.5;">This is an UPDATED Teriyaki Smoked Salmon recipe - easy to prepare with just a few ingredients!</small>
+      <div slot="footer">
+        <sl-button-group>
+          <sl-button variant="primary" href="recipes/teriyakismokedsalmon.html">
+            <sl-icon slot="prefix" name="book"></sl-icon>
+            View Recipe
+          </sl-button>
+          <sl-button variant="success" size="small" class="quick-export-btn" data-recipe-id="9c508513-7054-4554-b313-835f7cb4c0c8">
+            <sl-icon slot="prefix" name="basket"></sl-icon>
+          </sl-button>
+        </sl-button-group>
+      </div>
+    </sl-card>
+
+    <sl-card class="recipe-card" style="position: relative;">
+      <div class="professional-badge">Imported Recipe</div>
+      <img
+        slot="image"
+        src="https://bbqingwiththenolands.com/wp-content/uploads/2020/07/Smoked-Chicken-Thighs-680x1020-1.jpg"
+        alt="Smoked Chicken Thighs"
+        style="height: 200px; object-fit: cover;"
+      />
+      <strong style="color: #ff6b35; font-size: 1.2rem;">Smoked Chicken Thighs</strong>
+      <br />
+      <sl-badge variant="success" size="small" style="margin: 0.5rem 0;">2-Hour Process</sl-badge>
+      <sl-badge variant="neutral" size="small">Imported Recipe</sl-badge>
+      <br /><br />
+      <small style="color: #495057; font-weight: 500; line-height: 1.5;">One of the keys to great Smoked Chicken Thighs is making sure that you have seasoned it properly with a great rub before it goes into the smoker.</small>
+      <div slot="footer">
+        <sl-button-group>
+          <sl-button variant="primary" href="recipes/smokedchickenthighs.html">
+            <sl-icon slot="prefix" name="book"></sl-icon>
+            View Recipe
+          </sl-button>
+          <sl-button variant="success" size="small" class="quick-export-btn" data-recipe-id="5ee52ad6-0fe9-4256-a9c5-24cc11b3f373">
+            <sl-icon slot="prefix" name="basket"></sl-icon>
+          </sl-button>
+        </sl-button-group>
+      </div>
+    </sl-card>
+
+    <sl-card class="recipe-card" style="position: relative;">
+      <div class="professional-badge">Imported Recipe</div>
+      <img
+        slot="image"
+        src="https://heygrillhey.com/wp-content/uploads/2019/05/Poor-Mans-Burnt-Ends-Feature.png"
+        alt="Poor Man&#39;s Burnt Ends"
+        style="height: 200px; object-fit: cover;"
+      />
+      <strong style="color: #ff6b35; font-size: 1.2rem;">Poor Man&#39;s Burnt Ends</strong>
+      <br />
+      <sl-badge variant="success" size="small" style="margin: 0.5rem 0;">8-Hour Process</sl-badge>
+      <sl-badge variant="neutral" size="small">Imported Recipe</sl-badge>
+      <br /><br />
+      <small style="color: #495057; font-weight: 500; line-height: 1.5;">Poor Man&#39;s Burnt Ends are a great way to get beefy smoked goodness, with all of the classic BBQ flavors you love, without having to smoke a whole brisket.</small>
+      <div slot="footer">
+        <sl-button-group>
+          <sl-button variant="primary" href="recipes/poormansburntends.html">
+            <sl-icon slot="prefix" name="book"></sl-icon>
+            View Recipe
+          </sl-button>
+          <sl-button variant="success" size="small" class="quick-export-btn" data-recipe-id="1331ecf8-664e-4f1d-aff2-893bb7e0b74c">
+            <sl-icon slot="prefix" name="basket"></sl-icon>
+          </sl-button>
+        </sl-button-group>
+      </div>
+    </sl-card>
+
+    
+
+    
+
   </div>
+  </div>
+
+  <script>
+    // Bulk Shopping List Functionality
+    document.addEventListener('DOMContentLoaded', () => {
+      const shoppingListUI = window.ShoppingListUI;
+      const bulkButton = document.getElementById('bulk-shopping-list-btn');
+      const shoppingPanel = document.getElementById('shopping-list-panel');
+      const selectionGrid = document.getElementById('recipe-selection-grid');
+      const selectAllBtn = document.getElementById('select-all-recipes');
+      const clearSelectionBtn = document.getElementById('clear-selection');
+      const generateListBtn = document.getElementById('generate-bulk-list');
+      const closePanelBtn = document.getElementById('close-shopping-panel');
+
+      let availableRecipes = [];
+      let selectedRecipes = new Set();
+
+      // Load available recipes
+      async function loadRecipes() {
+        try {
+          const response = await fetch('/api/recipes');
+          const data = await response.json();
+          if (data.success && data.recipes) {
+            availableRecipes = data.recipes;
+            renderRecipeSelection();
+          }
+        } catch (error) {
+          console.error('Failed to load recipes:', error);
+          shoppingListUI.showToast('Failed to load recipes', 'danger');
+        }
+      }
+
+      // Render recipe selection cards
+      function renderRecipeSelection() {
+        selectionGrid.innerHTML = availableRecipes.map(recipe => `
+          <sl-card class="recipe-selection-card" style="position: relative; cursor: pointer; transition: all 0.3s ease;" data-recipe-id="${recipe.id}">
+            <div class="selection-overlay" style="position: absolute; top: 10px; right: 10px; z-index: 10;">
+              <sl-checkbox class="recipe-checkbox" data-recipe-id="${recipe.id}" style="background: white; border-radius: 50%; padding: 2px;"></sl-checkbox>
+            </div>
+            ${recipe.image ? `
+              <img slot="image" src="${recipe.image}" alt="${recipe.title}" style="height: 150px; object-fit: cover;" />
+            ` : ''}
+            <div style="padding: 1rem;">
+              <strong style="color: #ff6b35; font-size: 1rem; display: block; margin-bottom: 0.5rem;">${recipe.title}</strong>
+              <small style="color: #6c757d; line-height: 1.4;">${recipe.description || 'No description available'}</small>
+              <div style="margin-top: 0.5rem;">
+                <sl-badge variant="neutral" size="small">${recipe.ingredients ? recipe.ingredients.length : 0} ingredients</sl-badge>
+                ${recipe.servings ? `<sl-badge variant="primary" size="small">Serves ${recipe.servings}</sl-badge>` : ''}
+              </div>
+            </div>
+          </sl-card>
+        `).join('');
+
+        // Add click handlers for recipe selection
+        selectionGrid.querySelectorAll('.recipe-selection-card').forEach(card => {
+          const recipeId = card.dataset.recipeId;
+          const checkbox = card.querySelector('.recipe-checkbox');
+          
+          card.addEventListener('click', (e) => {
+            // Don't trigger if clicking the checkbox itself
+            if (e.target.tagName === 'SL-CHECKBOX') return;
+            
+            checkbox.checked = !checkbox.checked;
+            toggleRecipeSelection(recipeId, checkbox.checked);
+          });
+
+          checkbox.addEventListener('sl-change', (e) => {
+            toggleRecipeSelection(recipeId, e.target.checked);
+          });
+        });
+      }
+
+      // Toggle recipe selection
+      function toggleRecipeSelection(recipeId, selected) {
+        const card = document.querySelector(`.recipe-selection-card[data-recipe-id="${recipeId}"]`);
+        
+        if (selected) {
+          selectedRecipes.add(recipeId);
+          card.style.border = '2px solid #ff6b35';
+          card.style.transform = 'translateY(-2px)';
+          card.style.boxShadow = '0 8px 24px rgba(0,0,0,0.15)';
+        } else {
+          selectedRecipes.delete(recipeId);
+          card.style.border = '2px solid #e9ecef';
+          card.style.transform = 'none';
+          card.style.boxShadow = '0 4px 12px rgba(0,0,0,0.1)';
+        }
+
+        updateSelectionUI();
+      }
+
+      // Update UI based on selection
+      function updateSelectionUI() {
+        const count = selectedRecipes.size;
+        generateListBtn.disabled = count === 0;
+        generateListBtn.innerHTML = count > 0 
+          ? `<sl-icon slot="prefix" name="list-check"></sl-icon>Generate Shopping List (${count} recipes)`
+          : `<sl-icon slot="prefix" name="list-check"></sl-icon>Generate Shopping List`;
+      }
+
+      // Event handlers
+      bulkButton.addEventListener('click', () => {
+        shoppingPanel.style.display = 'block';
+        shoppingPanel.scrollIntoView({ behavior: 'smooth' });
+        loadRecipes();
+      });
+
+      closePanelBtn.addEventListener('click', () => {
+        shoppingPanel.style.display = 'none';
+        selectedRecipes.clear();
+        updateSelectionUI();
+      });
+
+      selectAllBtn.addEventListener('click', () => {
+        availableRecipes.forEach(recipe => {
+          const checkbox = document.querySelector(`.recipe-checkbox[data-recipe-id="${recipe.id}"]`);
+          if (checkbox && !checkbox.checked) {
+            checkbox.checked = true;
+            toggleRecipeSelection(recipe.id, true);
+          }
+        });
+      });
+
+      clearSelectionBtn.addEventListener('click', () => {
+        selectedRecipes.forEach(recipeId => {
+          const checkbox = document.querySelector(`.recipe-checkbox[data-recipe-id="${recipeId}"]`);
+          if (checkbox) {
+            checkbox.checked = false;
+            toggleRecipeSelection(recipeId, false);
+          }
+        });
+        selectedRecipes.clear();
+        updateSelectionUI();
+      });
+
+      generateListBtn.addEventListener('click', () => {
+        const recipeIds = Array.from(selectedRecipes);
+        
+        shoppingListUI.showOptionsModal(async (options, organizeByCategory) => {
+          try {
+            shoppingListUI.showToast('Generating shopping list from selected recipes...', 'primary');
+            const result = await shoppingListUI.generateMultipleRecipesList(recipeIds, options);
+            
+            // Show warnings if any
+            if (result.warnings && result.warnings.length > 0) {
+              shoppingListUI.showToast(`Generated with warnings: ${result.warnings.join(', ')}`, 'warning');
+            }
+            
+            shoppingListUI.showShoppingListModal(result.shoppingList, { 
+              organizeByCategory,
+              title: `Shopping List (${recipeIds.length} recipes)`
+            });
+            
+            // Hide the panel
+            shoppingPanel.style.display = 'none';
+          } catch (error) {
+            shoppingListUI.showToast('Failed to generate shopping list: ' + error.message, 'danger');
+          }
+        });
+      });
+
+      // Quick export functionality for individual recipe cards
+      document.addEventListener('click', (e) => {
+        if (e.target.closest('.quick-export-btn')) {
+          e.preventDefault();
+          e.stopPropagation();
+          
+          const button = e.target.closest('.quick-export-btn');
+          const recipeId = button.dataset.recipeId;
+          
+          if (recipeId) {
+            // Get recipe title from the card
+            const card = button.closest('.recipe-card');
+            const recipeTitle = card.querySelector('strong').textContent.trim();
+            
+            shoppingListUI.showOptionsModal(async (options, organizeByCategory) => {
+              try {
+                const defaultListName = `${recipeTitle} - Shopping List`;
+                const finalOptions = { ...options, listName: options.listName || defaultListName };
+                
+                shoppingListUI.showToast(`Generating shopping list for ${recipeTitle}...`, 'primary');
+                const shoppingList = await shoppingListUI.generateSingleRecipeList(recipeId, finalOptions);
+                shoppingListUI.showShoppingListModal(shoppingList, { organizeByCategory });
+              } catch (error) {
+                shoppingListUI.showToast(`Failed to generate shopping list: ${error.message}`, 'danger');
+              }
+            });
+          }
+        }
+      });
+    });
+  </script>
 </body>
 </html>

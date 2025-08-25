@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Poor Man&#39;s Burnt Ends - Reeves BBQ Co.</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/themes/light.css" />
+  <script type="module" src="https://cdn.jsdelivr.net/npm/@shoelace-style/shoelace@2.15.0/cdn/shoelace-autoloader.js"></script>
+  <script src="../js/ShoppingListUI.js"></script>
+  <meta name="recipe-id" content="1331ecf8-664e-4f1d-aff2-893bb7e0b74c" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: var(--sl-font-sans);
+      background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+      color: #212529;
+    }
+    .container {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 2rem;
+    }
+    .recipe-header {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+    .recipe-image {
+      width: 100%;
+      max-width: 500px;
+      height: 300px;
+      object-fit: cover;
+      border-radius: var(--sl-border-radius-large);
+      box-shadow: var(--sl-shadow-large);
+    }
+    .recipe-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+    @media (min-width: 768px) {
+      .recipe-grid {
+        grid-template-columns: 1fr 1fr 1fr;
+      }
+    }
+    .back-button {
+      margin-bottom: 2rem;
+    }
+    .source-info {
+      background: rgba(255, 107, 53, 0.1);
+      border: 1px solid rgba(255, 107, 53, 0.3);
+      border-radius: var(--sl-border-radius-medium);
+      padding: 1rem;
+      margin-bottom: 2rem;
+    }
+  </style>
+
+  <!-- RECIPE_METADATA_START
+{
+  "id": "1331ecf8-664e-4f1d-aff2-893bb7e0b74c",
+  "title": "Poor Man's Burnt Ends",
+  "description": "Poor Man's Burnt Ends are a great way to get beefy smoked goodness, with all of the classic BBQ flavors you love, without having to smoke a whole brisket.",
+  "ingredients": [
+    "2-3 lbs beef chuck roast",
+    "2 tbsp brown sugar",
+    "1 tbsp paprika",
+    "1 tbsp salt",
+    "1 tsp black pepper",
+    "1 tsp garlic powder",
+    "1/2 cup BBQ sauce"
+  ],
+  "instructions": [
+    "Cut chuck roast into 2-inch cubes",
+    "Season cubes with dry rub",
+    "Smoke at 250°F for 2-3 hours",
+    "Place in foil pan with butter and brown sugar",
+    "Continue smoking for 1-2 hours until tender",
+    "Toss with BBQ sauce before serving"
+  ],
+  "prepTime": "PT20M",
+  "cookTime": "PT5H",
+  "servings": "8",
+  "author": "Reeves BBQ Co.",
+  "sourceUrl": "https://heygrillhey.com/poor-mans-burnt-ends/",
+  "image": "https://heygrillhey.com/wp-content/uploads/2019/05/Poor-Mans-Burnt-Ends-Feature.png",
+  "filename": "poormansburntends.html",
+  "createdAt": "2025-08-23T19:01:49.770Z",
+  "modifiedAt": "2025-08-23T19:01:49.770Z"
+}
+RECIPE_METADATA_END -->
+</head>
+<body>
+  <div class="container">
+    <div class="back-button">
+      <sl-button variant="text" href="../index.html">
+        <sl-icon slot="prefix" name="arrow-left"></sl-icon>
+        Back to Championship Collection
+      </sl-button>
+    </div>
+    <div class="recipe-header">
+      <h1 style="color: var(--sl-color-neutral-800); margin-bottom: 1rem;">
+        <sl-icon name="fire" style="color: #ff6b35;"></sl-icon>
+        Poor Man&#39;s Burnt Ends
+      </h1>
+      <img src="https://heygrillhey.com/wp-content/uploads/2019/05/Poor-Mans-Burnt-Ends-Feature.png" alt="Poor Man&#39;s Burnt Ends" class="recipe-image">
+    </div>
+    <div class="recipe-actions" style="text-align: center; margin-bottom: 2rem;">
+      <sl-button-group>
+        <sl-button variant="neutral" id="edit-recipe-btn">
+          <sl-icon slot="prefix" name="edit"></sl-icon>
+          Edit Recipe
+        </sl-button>
+        <sl-button variant="danger" id="delete-recipe-btn">
+          <sl-icon slot="prefix" name="trash"></sl-icon>
+          Delete Recipe
+        </sl-button>
+      </sl-button-group>
+    </div>
+    <div class="source-info">
+      <sl-alert variant="primary" open>
+        <sl-icon slot="icon" name="link"></sl-icon>
+        <strong>Recipe Source:</strong> Imported from <strong>heygrillhey.com</strong> by Reeves BBQ Co.
+        <sl-button slot="footer" variant="text" href="https://heygrillhey.com/poor-mans-burnt-ends/" target="_blank">
+          <sl-icon slot="prefix" name="arrow-up-right-from-square"></sl-icon>
+          View Original Recipe
+        </sl-button>
+      </sl-alert>
+    </div>
+    <sl-card style="margin-bottom: 2rem;">
+      <sl-icon slot="prefix" name="info-circle"></sl-icon>
+      <h3 slot="header">About This Recipe</h3>
+      <p>Poor Man&#39;s Burnt Ends are a great way to get beefy smoked goodness, with all of the classic BBQ flavors you love, without having to smoke a whole brisket.</p>
+    </sl-card>
+    <div class="recipe-grid">
+      <sl-card>
+      <sl-icon slot="prefix" name="clock"></sl-icon>
+      <h3 slot="header">Recipe Details</h3>
+      <sl-details summary="Cooking Information">
+        <ul style="list-style: none; padding: 0;">
+          <li><sl-badge variant="neutral">Prep:</sl-badge> Recipe Details
+      
+        
+           PT15M
+          Cook: PT480M
+          Serves: 6 6 people
+        
+      
+    
+      
+      
+      Ingredients
+      
+        
+          3 pounds chuck roast
+          2 Tablespoons yellow mustard
+          ¼ cup brown sugar
+          2 Tablespoons brown sugar
+        
+      
+    
+      
+      
+      Instructions
+      
+        
+          Preheat. Preheat your smoker for indirect grilling at 275 degrees F. Use hickory or oak wood for the most complementary smoke flavor.
+          Season. Slather the chuck roast with yellow mustard then season liberally on all sides with Hey Grill Hey Beef Rub or equal parts salt, pepper, and garlic powder.
+          Smoke. When your smoker is up to temperature, place the seasoned roast on the smoker and close the lid. Smoke the roast until the internal temperature reaches 165 degrees F (this took 5 hours on my smoker). You should have a fairly nice dark bark on the exterior of your roast at this point.
+          Wrap. Remove the roast from the grill and wrap it in either butcher paper or foil. Return the roast to the grill and continue smoking until the meat reaches an internal temperature of 195 degrees F (this took just over 1 hour).
+          Rest and cut. Remove the wrapped roast from the grill and allow to rest for 15-20 minutes. Cut into 3/4 inch cubes and transfer to a foil baking pan.
+          Add sauce. Sprinkle with 1/4 cup brown sugar and drizzle with most of the Everything BBQ sauce, reserving a couple of tablespoons for later. Toss gently to coat all of the pieces in a little of the sauce.
+          Finish smoking. Place the pan on the grill, close the lid and cook for an additional 1 1/2 to 2 hours, or until the sauce is bubbly and the cubed bits of beef are falling apart tender.
+          Enjoy. Sprinkle with the additional 2 Tablespoons of brown sugar and the remaining BBQ sauce. stir gently and return to the grill for just a few more minutes until everything is well incorporated. Serve hot as a main course or on white bread/buns with pickles and white onions.</li>
+        </ul>
+      </sl-details>
+    </sl-card>
+      <sl-card>
+      <sl-icon slot="prefix" name="basket"></sl-icon>
+      <h3 slot="header">Ingredients</h3>
+      <sl-details summary="Shopping List">
+        <ul>
+          <li>3 pounds chuck roast</li>
+          <li>¼ cup brown sugar</li>
+          <li>2 Tablespoons brown sugar</li>
+          <li>Season. Slather the chuck roast with yellow mustard then season liberally on all sides with Hey Grill Hey Beef Rub or equal parts salt, pepper, and garlic powder.</li>
+          <li>Rest and cut. Remove the wrapped roast from the grill and allow to rest for 15-20 minutes. Cut into 3/4 inch cubes and transfer to a foil baking pan.</li>
+          <li>Finish smoking. Place the pan on the grill, close the lid and cook for an additional 1 1/2 to 2 hours, or until the sauce is bubbly and the cubed bits of beef are falling apart tender.</li>
+        </ul>
+      </sl-details>
+    </sl-card>
+      <sl-card>
+      <sl-icon slot="prefix" name="list-check"></sl-icon>
+      <h3 slot="header">Instructions</h3>
+      <sl-details summary="Cooking Steps">
+        <ol>
+          <li>Preheat. Preheat your smoker for indirect grilling at 275 degrees F. Use hickory or oak wood for the most complementary smoke flavor.</li>
+          <li>Season. Slather the chuck roast with yellow mustard then season liberally on all sides with Hey Grill Hey Beef Rub or equal parts salt, pepper, and garlic powder.</li>
+          <li>Smoke. When your smoker is up to temperature, place the seasoned roast on the smoker and close the lid. Smoke the roast until the internal temperature reaches 165 degrees F (this took 5 hours on my smoker). You should have a fairly nice dark bark on the exterior of your roast at this point.</li>
+          <li>Wrap. Remove the roast from the grill and wrap it in either butcher paper or foil. Return the roast to the grill and continue smoking until the meat reaches an internal temperature of 195 degrees F (this took just over 1 hour).</li>
+          <li>Rest and cut. Remove the wrapped roast from the grill and allow to rest for 15-20 minutes. Cut into 3/4 inch cubes and transfer to a foil baking pan.</li>
+          <li>Add sauce. Sprinkle with 1/4 cup brown sugar and drizzle with most of the Everything BBQ sauce, reserving a couple of tablespoons for later. Toss gently to coat all of the pieces in a little of the sauce.</li>
+          <li>Finish smoking. Place the pan on the grill, close the lid and cook for an additional 1 1/2 to 2 hours, or until the sauce is bubbly and the cubed bits of beef are falling apart tender.</li>
+          <li>Enjoy. Sprinkle with the additional 2 Tablespoons of brown sugar and the remaining BBQ sauce. stir gently and return to the grill for just a few more minutes until everything is well incorporated. Serve hot as a main course or on white bread/buns with pickles and white onions.</li>
+        </ol>
+      </sl-details>
+    </sl-card>
+    </div>
+  </div>
+  <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const editBtn = document.getElementById('edit-recipe-btn');
+        const deleteBtn = document.getElementById('delete-recipe-btn');
+        const recipeId = '1331ecf8-664e-4f1d-aff2-893bb7e0b74c';
+        
+        if (editBtn) {
+          editBtn.addEventListener('click', function() {
+            window.location.href = '/edit-recipe.html?id=' + recipeId;
+          });
+        }
+        
+        if (deleteBtn) {
+          deleteBtn.addEventListener('click', function() {
+            if (confirm('Are you sure you want to delete this recipe? This action cannot be undone.')) {
+              deleteRecipe(recipeId);
+            }
+          });
+        }
+      });
+      
+      async function deleteRecipe(recipeId) {
+        try {
+          // Show loading state
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          const originalContent = deleteBtn.innerHTML;
+          deleteBtn.innerHTML = '<sl-icon name="hourglass"></sl-icon> Deleting...';
+          deleteBtn.disabled = true;
+          
+          const response = await fetch('/api/recipes/' + recipeId, {
+            method: 'DELETE'
+          });
+          
+          const data = await response.json();
+          
+          if (data.success) {
+            // Show success message briefly before redirect
+            deleteBtn.innerHTML = '<sl-icon name="check-circle"></sl-icon> Deleted!';
+            setTimeout(() => {
+              window.location.href = '/index.html';
+            }, 1000);
+          } else {
+            alert('Failed to delete recipe: ' + (data.error || 'Unknown error'));
+            deleteBtn.innerHTML = originalContent;
+            deleteBtn.disabled = false;
+          }
+        } catch (error) {
+          alert('Network error: ' + error.message);
+          const deleteBtn = document.getElementById('delete-recipe-btn');
+          deleteBtn.innerHTML = originalContent;
+          deleteBtn.disabled = false;
+        }
+      }
+    </script>
+</body>
+</html>
